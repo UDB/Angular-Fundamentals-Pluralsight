@@ -11,16 +11,16 @@ import { ToastrService } from './common/toastr.service';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { appRoutes } from './routes';
 @NgModule({
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(appRoutes)
+  ],
   declarations: [
     EventsAppComponent,
     EventsListComponent,
     EventThumbnailComponent,
     NavBarComponent,
     EventDetailsComponent
-  ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     EventService,
