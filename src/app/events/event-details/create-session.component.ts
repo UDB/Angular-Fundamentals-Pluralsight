@@ -1,17 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ISession } from '../shared/index';
+import { ISession, restrictedWords } from '../shared/index';
 
 @Component({
   templateUrl: 'create-session.component.html',
-  styles: [`
-    em {float:right; color:#E05C65; padding-left: 10px;}
-    .error input, .error select, .error textarea {background-color: #E3C3C5;}
-    .error ::-webkit-input-placeholder {color:#999;}
-    .error ::-moz-placeholder {color: #999;}
-    .error :-moz-placeholder {color: #999;}
-    .error :ms-input-placeholder {color: #999;}
-  `]
+  styles: [
+    `
+      em {
+        float: right;
+        color: #e05c65;
+        padding-left: 10px;
+      }
+      .error input,
+      .error select,
+      .error textarea {
+        background-color: #e3c3c5;
+      }
+      .error ::-webkit-input-placeholder {
+        color: #999;
+      }
+      .error ::-moz-placeholder {
+        color: #999;
+      }
+      .error :-moz-placeholder {
+        color: #999;
+      }
+      .error :ms-input-placeholder {
+        color: #999;
+      }
+    `
+  ]
 })
 export class CreateSessionComponent implements OnInit {
   newSessionForm: FormGroup;
@@ -28,7 +46,8 @@ export class CreateSessionComponent implements OnInit {
     this.level = new FormControl('', Validators.required);
     this.abstract = new FormControl('', [
       Validators.required,
-      Validators.maxLength(400)
+      Validators.maxLength(400),
+      restrictedWords(['foo', 'bar'])
     ]);
 
     this.newSessionForm = new FormGroup({
